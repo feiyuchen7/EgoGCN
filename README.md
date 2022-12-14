@@ -4,7 +4,7 @@ Pytorch implementation for the paper:
 [Breaking Isolation: Multimodal Graph Fusion for Multimedia Recommendation by Edge-wise Modulation](https://dl.acm.org/doi/10.1145/3503161.3548399), ACM Mulimedia 2022.
 
 
-## Environment Requirement
+## Environment requirement
 The code has been tested running under Python 3.8.5. The required packages are as follows:
 * Pytorch 1.7.1
 * CUDA 11.3

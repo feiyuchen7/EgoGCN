@@ -29,21 +29,21 @@ class GATConv_pre(MessagePassing):
 
 
     def message(self, edge_index_i, x_i, x_j, size_i, y_i, y_j, z_i, z_j):  
-        #self.alpha = torch.mul(x_i, x_j).sum(dim=-1)
-        #self.alpha = softmax(src=self.alpha, index=edge_index_i, num_nodes=size_i)  
+        self.alpha = torch.mul(x_i, x_j).sum(dim=-1)
+        self.alpha = softmax(src=self.alpha, index=edge_index_i, num_nodes=size_i)  
 
-        #tmp = self.alpha.unsqueeze(1).expand_as(x_i)
-        gating1 = torch.sigmoid(self.fcy(y_i))
-        gating2 = torch.sigmoid(self.fcz(z_i))
+        tmp = self.alpha.unsqueeze(1).expand_as(x_i)
+        gating1 = torch.sigmoid(self.fcy(y_j))
+        gating2 = torch.sigmoid(self.fcz(z_j))
 
         if self.central == 'central_item':   
             #-------------------------------sum3-----------------------------------------
             if self.compare == '>':
-                x_i = torch.where(tmp>self.alpha_threshold, (x_i+y_i+z_i)/3, x_i)
+                x_j = torch.where(tmp>self.alpha_threshold, (x_j+y_j+z_j)/3, x_j)
             elif self.compare == '<':
-                x_i = torch.where(tmp<self.alpha_threshold, (x_i+y_i+z_i)/3, x_i)
+                x_j = torch.where(tmp<self.alpha_threshold, (x_j+y_j+z_j)/3, x_j)
             elif self.compare == '=':
-                x_i = (x_i + gating1*(y_i) + gating2*(z_i))/3
+                x_j = (x_j + gating1*(y_j) + gating2*(z_j))/3
 
             if self.reattn:
                 self.alpha = torch.mul(x_i, x_j).sum(dim=-1)

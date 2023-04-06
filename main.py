@@ -61,7 +61,7 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int, default=1024, help='Batch size.')
     parser.add_argument('--val_batch_size', type=int, default=1, help='Validation Batch size.')
 
-    parser.add_argument('--num_epoch', type=int, default=280, help='Epoch number.')
+    parser.add_argument('--num_epoch', type=int, default=300, help='Epoch number.')
     parser.add_argument('--num_workers', type=int, default=1, help='Workers number.')
     parser.add_argument('--num_routing', type=int, default=3, help='Layer number.')
 
